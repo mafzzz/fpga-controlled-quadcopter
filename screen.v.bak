@@ -1,0 +1,83 @@
+module screen (clk, sf_ce0, lcd_rs, lcd_rw, lcd_e, lcd_4, lcd_5, lcd_6, lcd_7,
+motor1ratio,motor2ratio,motor3ratio,motor4ratio);
+                    parameter       k = 18;
+  (* LOC="C9" *)    input           clk;        // synthesis attribute PERIOD clk "50 MHz"
+                    reg   [k+8-1:0] count=0;
+input [31:0] motor1ratio;	
+input [31:0] motor2ratio;
+input [31:0] motor3ratio;
+input [31:0] motor4ratio;
+  (* LOC="D16" *)   output reg      sf_ce0;     // high for full LCD access
+                    reg             lcd_busy=1;
+                    reg             lcd_stb;
+                    reg       [5:0] lcd_code;
+                    reg       [6:0] lcd_stuff;
+  (* LOC="L18" *)   output reg      lcd_rs;
+  (* LOC="L17" *)   output reg      lcd_rw;
+  (* LOC="M15" *)   output reg      lcd_7;
+  (* LOC="P17" *)   output reg      lcd_6;
+  (* LOC="R16" *)   output reg      lcd_5;
+  (* LOC="R15" *)   output reg      lcd_4;
+  (* LOC="M18" *)   output reg      lcd_e;
+  
+  reg [5:0] motor1 = (motor1ratio/10);
+  reg [5:0] motor2 = (motor2ratio/10);
+  reg [5:0] motor3 = (motor3ratio/10);
+  reg [5:0] motor4 = (motor4ratio/10);
+
+   reg control;
+  always @ (posedge clk) begin
+    
+	 sf_ce0 <= 1;
+	 
+	
+	 
+	 count  <= count + 1;
+    sf_ce0 <= 1;
+    case (count[k+7:k+2])
+       0: lcd_code <= 6'h03;        // power-on initialization
+       1: lcd_code <= 6'h03;
+       2: lcd_code <= 6'h03;
+       3: lcd_code <= 6'h02;
+       4: lcd_code <= 6'h02;        // function set
+       5: lcd_code <= 6'h08;
+       6: lcd_code <= 6'h00;        // entry mode set
+       7: lcd_code <= 6'h06;
+       8: lcd_code <= 6'h00;        // display on/off control
+       9: lcd_code <= 6'h0C;
+      10: lcd_code <= 6'h00;        // display clear
+      11: lcd_code <= 6'h01;
+      12: lcd_code <= 6'h23;        // H
+      13: lcd_code <= control+6'd32;
+      14: lcd_code <= 6'h23;        // e
+      15: lcd_code <= control+6'd32;			//     15: lcd_code <= 6'h25;
+      16: lcd_code <= 6'h23;         // l //      16: lcd_code <= 6'h26;       
+      17: lcd_code <= control+6'd32;
+      18: lcd_code <= 6'h23;        // l
+      19: lcd_code <= control+6'd32;
+      20: lcd_code <= 6'h23;        // o
+      21: lcd_code <= control+6'd32;
+      22: lcd_code <= 6'h23;        //
+      23: lcd_code <= control+6'd32;
+      24: lcd_code <= 6'h23;        // W
+      25: lcd_code <= control+6'd32;
+      26: lcd_code <= 6'h23;        // o
+      27: lcd_code <= control+6'd32;
+      28: lcd_code <= 6'h23;        // r
+      29: lcd_code <= control+6'd32;
+      30: lcd_code <= 6'h23;        // l
+      31: lcd_code <= control+6'd32;
+      32: lcd_code <= 6'h23;        // d
+      33: lcd_code <= control+6'd32;
+      34: lcd_code <= 6'h23;        // !
+      35: lcd_code <= control+6'd32;
+      default: lcd_code <= 6'h10;
+    endcase
+	 
+  //if (lcd_rw)                     // comment-out for repeating display
+   //lcd_busy <= 0;                // comment-out for repeating display
+    lcd_stb <= ^count[k+1:k+0] & ~lcd_rw & lcd_busy;  // clkrate / 2^(k+2)
+    lcd_stuff <= {lcd_stb,lcd_code};
+    {lcd_e,lcd_rs,lcd_rw,lcd_7,lcd_6,lcd_5,lcd_4} <= lcd_stuff;
+  end
+endmodule

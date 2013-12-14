@@ -1,0 +1,6 @@
+module buzzer(clk, num, on);
+input clk;
+input [8:0] num;
+output on;
+
+endmodule

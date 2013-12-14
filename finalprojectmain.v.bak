@@ -1,0 +1,10 @@
+module finalprojectmain(clk, 
+motor1out, motor2out,motor3out,motor4out,
+ch1in,ch2in,ch3in,ch4in,ch5in,ch6in,
+gyroxin,gyroyin,gyrozin;
+
+input clk;
+input ch1in, ch2in, ch3in, ch4in, ch5in, ch6in; //ch1 = aileron (roll)
+input gyroxin, gyroyin, gyrozin;						//ch2 = elevator (pitch)
+																//ch3 = throttle
+																//ch4 = rudder (yaw)	

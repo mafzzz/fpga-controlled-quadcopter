@@ -1,0 +1,80 @@
+module gyro(clk, pwmsignal ,ratio);
+input clk;
+input pwmsignal;
+
+
+output [12:0] ratio;
+reg pwm;
+reg [31:0] counter;
+reg [31:0] signalon;		//# of times a sec pwm signal is at 1
+reg [31:0] signaloff;	//# of time a sec pwm signal is at 0
+reg [12:0] ratio;
+reg [31:0] tempcounter;
+reg [31:0] tempratio;
+
+always @ (posedge clk)
+begin
+if (counter<32'd50)	//whenever the counter is reset, signalon is also reset
+begin
+signalon <= 32'd0;
+signaloff <= 32'd0;
+end
+else
+begin
+end
+
+tempcounter <= tempcounter+1;
+counter <= counter+1;
+
+
+if (pwmsignal == 1'b1)
+begin
+signalon <= signalon+1;
+end
+else
+begin
+if (signalon>50000)
+begin
+tempratio <= (((signalon - 32'd50000)/32'd100)); //number will be bewteen 0 and 500
+signalon <= 1'b0;
+counter <= 1'b0;
+end
+else
+begin
+end
+end
+
+
+if (tempcounter >= (32'd2500000))
+begin
+tempcounter <= 32'd0;
+ratio <= tempratio;
+end
+else
+begin
+end
+
+
+end
+
+
+
+
+endmodule
+
+
+
+//if ((signalon >=32'd51000)&&(counter>=((32'd900000)-(100*control)))) 
+//if ((counter >= (32'd135000)&&(signalon >=32'd50000))) 	//clock speed is 50,000,000hz
+//begin						//we want to refresh signal 50 time a sec
+//counter <= 32'b0;	
+//ratio <= ((signalon - (32'd50000))/32'd500);
+//tempratio <= ((signalon - (32'd50000))/(32'd500));
+		//max signalon is 100,000  min is 50,000. This way answer is between 0 and 100
+//end
+//else
+//begin
+//end
+
+
+
