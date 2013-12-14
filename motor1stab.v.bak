@@ -1,0 +1,226 @@
+module motor1stab(clk, rst
+gyroxratio,gyroyratio,gyrozratio,
+ch1in, ch2in, ch3in, ch4in,
+motor1ratio,motor2ratio,motor3ratio,motor4ratio);
+
+input gyroxratiol, gyroyratio,gyrozratio;
+input ch1in, ch2in, ch3in, ch4in
+input clk,rst;
+
+output [10:0] motor1ratio,motor2ratio,motor3ratio,motor4ratio;
+
+
+reg [31:0] counter;
+reg [31:0] tempcounter;
+reg seconds;		//# of times a sec pwm signal is at 1
+
+reg[3:0]S;	//state
+reg[3:0]NS; //next state
+
+
+reg[31:0]count1;
+reg[16:0]count2;
+reg[16:0]count3;
+reg[16:0]count4;
+reg[16:0]count5;
+
+reg[16:0]cnt1;
+reg[16:0]cnt2;
+reg[16:0]cnt3;
+reg[16:0]cnt4;
+reg[16:0]cnt5;
+reg[16:0]cnt6;
+reg[16:0]cnt7;
+reg[16:0]cnt8;
+reg [16:0] second;
+
+parameter	
+			START					= 4'd0,
+			GETGYRO 				= 4'd1,
+			GETANGACC 			= 4'd2,
+			GETCHAN 				= 4'd3,
+			ADJUSTMOTORFORX	= 4'd4,
+			ADJUSTMOTORFORY	= 4'd5,			
+			ADJUSTMOTORFORZ	= 4'd6,
+			ADJUSTMOTORFORCH  = 4'd7;	
+			
+			
+
+
+
+always @(posedge seconds)
+begin
+
+
+	case(S)
+		START:
+		begin
+
+			
+			begin
+			cnt1<=second;
+			cnt2<=second;
+			cnt3<=second;
+			cnt4<=second;
+			cnt5<=second;
+			count4<=second;
+				count5 <= second;
+				NS <= GETGYRO;
+				
+				end
+		end
+		
+		
+		GETGYRO:
+		begin
+		
+		
+				NS <= GETANGACC;
+		end
+		
+		GETANGACC:
+		begin
+		
+	
+				
+				NS <= GETCHAN;
+				
+		end
+		
+		GETCHAN:
+		begin
+				
+				NS <= ADJUSTMOTORFORX;	
+				end
+				
+		end
+		
+		ADJUSTMOTORFORX:
+		begin
+			
+			if (gyroxratio)
+			begin
+			cnt8 <= second;
+			NS <= ADJUSTMOTORFORY;	
+					
+			end
+		end
+		
+		ADJUSTMOTORFORY:
+		begin
+			
+			
+			
+
+			NS <= ADJUSTMOTORFORZ;	
+					
+			
+		end
+		
+		ADJUSTMOTORFORZ:
+		begin
+			
+		
+			NS <= AFTERWEYELLOW;	
+					
+
+		end
+		
+		default:
+		begin
+		NS <= START;
+		
+		end
+	endcase
+end
+//#####################end of states and next states
+
+
+always @(posedge clk or negedge rst)
+begin
+
+	if (rst == 1'b0)
+	begin
+		S <= START;
+		counter <= 32'd0;
+		second <= 32'd0;
+		tempcounter <= 32'd0;
+		
+		
+	end
+	else
+	begin
+		S <= NS;		
+		
+counter <= counter +1;
+tempcounter <= tempcounter +1;
+
+if (counter == (32'd10000))
+begin						
+seconds <= 1'b1;
+second <= second +1'b1;
+counter <= 32'b0;	
+end
+
+if (tempcounter == 32'd20000)
+begin
+tempcounter <= 32'd0;
+seconds <= 1'b0;
+end
+
+end
+end
+
+
+always @(*)
+begin
+
+
+case (S)
+
+	START:
+		begin
+			nsout = 3'b0;
+			weout = 3'b0;
+		end
+		
+
+		
+	GETGYRO:
+		begin		
+		
+		nsout = 3'b010;
+		weout = 3'b100;
+		end
+		
+		GETANGACC:
+		begin		
+		
+		nsout = 3'b100;
+		weout = 3'b100;
+		end
+		
+	GETCHAN:
+		begin
+		nsout = 3'b100;
+		weout = 3'b001;
+		end
+		
+	ADJUSTMOTOR:
+		begin
+		nsout = 3'b001;
+		weout = 3'b100;
+		end
+		
+		
+	endcase
+	
+end
+
+
+endmodule
+
+
+
+
+

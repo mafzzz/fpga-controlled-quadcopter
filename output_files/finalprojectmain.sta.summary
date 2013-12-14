@@ -1,0 +1,125 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'clk'
+Slack : -74.478
+TNS   : -20107.196
+
+Type  : Slow Model Setup 'motor1stab:comb_7|S.ADJUSTMOTOR1'
+Slack : -53.400
+TNS   : -2258.883
+
+Type  : Slow Model Setup 'channel:channe5pwmtoratio|ratio[10]'
+Slack : -7.233
+TNS   : -34.563
+
+Type  : Slow Model Setup 'motor1stab:comb_7|S.GETMOTOR2'
+Slack : -4.640
+TNS   : -218.863
+
+Type  : Slow Model Setup 'motor1stab:comb_7|S.GETMOTOR3'
+Slack : -3.533
+TNS   : -126.857
+
+Type  : Slow Model Hold 'channel:channe5pwmtoratio|ratio[10]'
+Slack : -17.281
+TNS   : -85.407
+
+Type  : Slow Model Hold 'clk'
+Slack : -2.141
+TNS   : -53.871
+
+Type  : Slow Model Hold 'motor1stab:comb_7|S.GETMOTOR3'
+Slack : -0.224
+TNS   : -0.602
+
+Type  : Slow Model Hold 'motor1stab:comb_7|S.GETMOTOR2'
+Slack : 0.354
+TNS   : 0.000
+
+Type  : Slow Model Hold 'motor1stab:comb_7|S.ADJUSTMOTOR1'
+Slack : 1.237
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'channel:channe5pwmtoratio|ratio[10]'
+Slack : -4.916
+TNS   : -3424.058
+
+Type  : Slow Model Minimum Pulse Width 'clk'
+Slack : -1.423
+TNS   : -2032.828
+
+Type  : Slow Model Minimum Pulse Width 'motor1stab:comb_7|S.ADJUSTMOTOR1'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'motor1stab:comb_7|S.GETMOTOR2'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'motor1stab:comb_7|S.GETMOTOR3'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Setup 'clk'
+Slack : -32.062
+TNS   : -7989.966
+
+Type  : Fast Model Setup 'motor1stab:comb_7|S.ADJUSTMOTOR1'
+Slack : -22.047
+TNS   : -927.576
+
+Type  : Fast Model Setup 'channel:channe5pwmtoratio|ratio[10]'
+Slack : -3.171
+TNS   : -14.197
+
+Type  : Fast Model Setup 'motor1stab:comb_7|S.GETMOTOR2'
+Slack : -1.487
+TNS   : -62.063
+
+Type  : Fast Model Setup 'motor1stab:comb_7|S.GETMOTOR3'
+Slack : -1.409
+TNS   : -43.804
+
+Type  : Fast Model Hold 'channel:channe5pwmtoratio|ratio[10]'
+Slack : -7.326
+TNS   : -35.796
+
+Type  : Fast Model Hold 'clk'
+Slack : -1.416
+TNS   : -42.246
+
+Type  : Fast Model Hold 'motor1stab:comb_7|S.GETMOTOR3'
+Slack : 0.334
+TNS   : 0.000
+
+Type  : Fast Model Hold 'motor1stab:comb_7|S.GETMOTOR2'
+Slack : 0.579
+TNS   : 0.000
+
+Type  : Fast Model Hold 'motor1stab:comb_7|S.ADJUSTMOTOR1'
+Slack : 0.894
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'channel:channe5pwmtoratio|ratio[10]'
+Slack : -1.829
+TNS   : -1076.282
+
+Type  : Fast Model Minimum Pulse Width 'clk'
+Slack : -1.519
+TNS   : -2049.724
+
+Type  : Fast Model Minimum Pulse Width 'motor1stab:comb_7|S.ADJUSTMOTOR1'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'motor1stab:comb_7|S.GETMOTOR2'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'motor1stab:comb_7|S.GETMOTOR3'
+Slack : 0.500
+TNS   : 0.000
+
+------------------------------------------------------------

@@ -1,0 +1,6 @@
+module mode(ch5ratio, mode);
+input [10:0] ch5ratio;
+output [3:0] mode;
+
+
+endmodule

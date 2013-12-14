@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at motor1stab.v(91): always construct contains both blocking and non-blocking assignments

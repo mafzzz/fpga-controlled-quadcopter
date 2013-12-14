@@ -1,0 +1,10 @@
+v1
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult0|mult_a8t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult4|mult_a8t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult1|mult_a8t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult5|mult_a8t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult2|mult_a8t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult6|mult_a8t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult3|mult_a8t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,motor1stab:comb_7|lpm_mult:Mult7|mult_a8t:auto_generated|mac_out2,
+PORT_SWAPPING,PORT_SWAPPING_FINISHED,motor1stab:comb_7|lpm_mult:Mult4|mult_a8t:auto_generated|mac_mult1,
